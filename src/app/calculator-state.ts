@@ -13,6 +13,6 @@ export function applyDigit(digit: number, state: CalculatorState): CalculatorSta
   return new CalculatorState(state.main * 10 + digit, state.main * 10 + digit, state.activeOperation);
 }
 
-export function applyOperator(operator: (a: number, b: number) => number, state: CalculatorState): CalculatorState {
+export function applyOperation(operator: (a: number, b: number) => number, state: CalculatorState): CalculatorState {
   return new CalculatorState(0, state.activeOperation(state.main), b => operator(state.activeOperation(state.main), b));
 }

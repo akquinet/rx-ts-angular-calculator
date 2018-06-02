@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {applyDigit, applyOperator, CalculatorState, Operator} from './calculator-state';
+import {applyDigit, applyOperation, CalculatorState, Operator} from './calculator-state';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import 'rxjs-compat/add/operator/withLatestFrom';
 import 'rxjs-compat/add/observable/merge';
@@ -19,7 +19,7 @@ export class RxCalculatorService extends CalculatorService {
     super();
     Observable.merge(
       this.digits.withLatestFrom(this.state, applyDigit),
-      this.operations.withLatestFrom(this.state, applyOperator)
+      this.operations.withLatestFrom(this.state, applyOperation)
     ).subscribe(this.state);
   }
 

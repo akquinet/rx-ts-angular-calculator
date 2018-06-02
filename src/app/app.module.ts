@@ -5,6 +5,7 @@ import {AppComponent} from './app.component';
 import {OperationButtonComponent} from './operation-button/operation-button.component';
 import {DigitButtonComponent} from './digit-button/digit-button.component';
 import {CalculatorService} from './calculator-service';
+import {SodiumCalculatorService} from './sodium-calculator-service';
 import {RxCalculatorService} from './rx-calculator-service';
 
 @NgModule({
@@ -16,7 +17,8 @@ import {RxCalculatorService} from './rx-calculator-service';
   imports: [
     BrowserModule
   ],
-  providers: [{provide: CalculatorService, useClass: RxCalculatorService}], // useClass: SodiumCalculatorService
+  // providers: [{provide: CalculatorService, useClass: RxCalculatorService}],
+  providers: [{provide: CalculatorService, useClass: SodiumCalculatorService}],
   bootstrap: [AppComponent]
 })
 export class AppModule {
