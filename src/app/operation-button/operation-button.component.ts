@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {StreamSink, Unit, Stream} from 'sodiumjs';
+import {Component, Input} from '@angular/core';
+import {Operator} from '../calculator-state';
+import {CalculatorService} from '../calculator-service';
 
 @Component({
   selector: 'app-operation-button',
@@ -7,17 +8,13 @@ import {StreamSink, Unit, Stream} from 'sodiumjs';
   styleUrls: ['./operation-button.component.css']
 })
 export class OperationButtonComponent {
+  @Input()
+  private operator: Operator;
 
-  @Input() operationSymbol: string;
-
-  private _stream = new StreamSink<Unit>();
-  get stream(): Stream<Unit> {
-    return this._stream;
+  constructor(private service: CalculatorService) {
   }
 
-  // noinspection JSUnusedGlobalSymbols
   onClick() {
-    this._stream.send(Unit.UNIT);
+    this.service.enterOperator(this.operator);
   }
-
 }

@@ -1,28 +1,19 @@
-import {Component, Input, AfterViewInit} from '@angular/core';
-import {StreamSink, Stream } from 'sodiumjs';
+import {Component, Input} from '@angular/core';
+import {CalculatorService} from '../calculator-service';
 
 @Component({
   selector: 'app-digit-button',
   templateUrl: './digit-button.component.html',
   styleUrls: ['./digit-button.component.css']
 })
-export class DigitButtonComponent implements AfterViewInit {
+export class DigitButtonComponent {
 
   @Input() digit: number;
 
-  private streamSink: StreamSink<number> = new StreamSink<number>();
-  get stream(): Stream<number> {
-    return this.streamSink;
+  constructor(private service: CalculatorService) {
   }
 
   onClick() {
-    this.streamSink.send(this.digit);
-  }
-
-  ngOnInit() {
-    console.log("ngOnInit() - DigitButtonComponent");
-  }
-  ngAfterViewInit() {
-    console.log("ngAfterViewInit() - DigitButtonComponent");
+    this.service.enterDigit(this.digit);
   }
 }
