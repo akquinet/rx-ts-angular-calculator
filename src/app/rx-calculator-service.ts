@@ -28,15 +28,6 @@ export class RxCalculatorService extends CalculatorService {
   }
 
   public enterOperator(value: Operator) {
-    this.operations.next(this.operation(value));
-  }
-
-  private operation(operator: Operator): (a: number, b: number) => number {
-    switch (operator) {
-      case Operator.Compute: return (a, b) => b;
-      case Operator.Plus: return (a, b) => a + b;
-      case Operator.Minus: return (a, b) => a - b;
-      default: throw new Error('Operator not supported');
-    }
+    this.operations.next(Operator.toOperation(value));
   }
 }

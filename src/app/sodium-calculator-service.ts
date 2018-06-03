@@ -18,7 +18,6 @@ export class SodiumCalculatorService extends CalculatorService {
 
   constructor() {
     super();
-
     Transaction.run(() => {
       this.statusC = new CellLoop<CalculatorState>();
       const updatedStateS = this.digitS.snapshot(this.statusC, applyDigit)
@@ -39,19 +38,6 @@ export class SodiumCalculatorService extends CalculatorService {
   }
 
   public enterOperator(value: Operator) {
-    this.operationS.send(this.operation(value));
-  }
-
-  private operation(operator: Operator): (a: number, b: number) => number {
-    switch (operator) {
-      case Operator.Compute:
-        return (a, b) => b;
-      case Operator.Plus:
-        return (a, b) => a + b;
-      case Operator.Minus:
-        return (a, b) => a - b;
-      default:
-        throw new Error('Operator not supported');
-    }
+    this.operationS.send(Operator.toOperation(value));
   }
 }

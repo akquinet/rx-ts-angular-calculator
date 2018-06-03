@@ -4,6 +4,17 @@ export enum Operator {
   Compute = '='
 }
 
+export namespace Operator {
+  export function toOperation(operator: Operator): (a: number, b: number) => number {
+    switch (operator) {
+      case Operator.Compute: return (a, b) => b;
+      case Operator.Plus: return (a, b) => a + b;
+      case Operator.Minus: return (a, b) => a - b;
+      default: throw new Error('Operator not supported');
+    }
+  }
+}
+
 export class CalculatorState {
   constructor(readonly main: number, readonly display: number, readonly activeOperation: (b: number) => number) {
   }
